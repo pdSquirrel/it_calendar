@@ -13,12 +13,18 @@ from calendar import HTMLCalendar
 # 'Dienstag'
 
 def home(request, year, month):
-    name = "Roger"
+    month = month.capitalize() # Make sure first letter is capitalized in the string
     # Convert month from name to number
     month_number = list(calendar.month_name).index(month)
-    print(month_number)
+    month_number = int(month_number)
+    
+    #create a calendar
+    cal = HTMLCalendar().formatmonth(year, month_number)
+
+    
     return render(request, 'home.html', {
-        "name": name,
         "year": year,
+        "month": month,
         "month_number": month_number,
+        "cal": cal
     })
